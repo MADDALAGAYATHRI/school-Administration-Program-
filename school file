@@ -1,0 +1,57 @@
+class Student:
+    def __init__(self, student_id, name):
+        self.student_id = student_id
+        self.name = name
+        self.courses = []
+
+    def enroll(self, course):
+        self.courses.append(course)
+        course.add_student(self)
+
+class Course:
+    def __init__(self, course_code, course_name):
+        self.course_code = course_code
+        self.course_name = course_name
+        self.students = []
+
+    def add_student(self, student):
+        self.students.append(student)
+
+def display_student_info(student):
+    print(f"Student ID: {student.student_id}")
+    print(f"Student Name: {student.name}")
+    print("Courses Enrolled:")
+    for course in student.courses:
+        print(f"- {course.course_name}")
+
+def display_course_info(course):
+    print(f"Course Code: {course.course_code}")
+    print(f"Course Name: {course.course_name}")
+    print("Students Enrolled:")
+    for student in course.students:
+        print(f"- {student.name}")
+
+# Creating students
+student1 = Student("S001", "Alice")
+student2 = Student("S002", "Bob")
+
+# Creating courses
+course1 = Course("C001", "Mathematics")
+course2 = Course("C002", "History")
+
+# Enroll students
+student1.enroll(course1)
+student1.enroll(course2)
+student2.enroll(course1)
+
+# Display student information
+print("Student Information:")
+display_student_info(student1)
+print()
+display_student_info(student2)
+
+# Display course information
+print("\nCourse Information:")
+display_course_info(course1)
+print()
+display_course_info(course2)
